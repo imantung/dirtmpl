@@ -1,0 +1,1 @@
+{{define "comp_x"}}Component X{{end}}

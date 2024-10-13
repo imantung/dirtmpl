@@ -1,3 +1,1 @@
-{{define "_footer"}}
-By iman.tung@gmail.com
-{{end}}
+{{define "_author"}}By iman.tung@gmail.com{{end}}

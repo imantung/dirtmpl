@@ -1,3 +1,1 @@
-{{define "comp_y"}}
-Component Y
-{{end}}
+{{define "comp_y"}}Component Y{{end}}
