@@ -10,10 +10,12 @@ Use [go standard template](https://pkg.go.dev/html/template), not additional lib
 
 ## Features
 
-- [ ] Support OS file system (relative path)
-- [ ] Support go fsys (go embed)
+- [x] Support nested template
+- [x] Support OS file system (relative path)
+- [x] Support go fsys (go embed)
 - [ ] Support html/template
 - [ ] Support text/template
+- [x] Custom prefix
 - [ ] Exclude specific file
 - [ ] Filter by file extension
 
@@ -23,7 +25,8 @@ WIP
 
 ## Examples
 
-- [ ] Print map examples
+- [x] Print map with `os.ReadDir`
+- [x] Print map with go embed
 - [ ] Generate static html file 
 - [ ] Web server with go http standard 
 - [ ] Web server with echo 
