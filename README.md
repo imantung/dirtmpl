@@ -14,7 +14,7 @@ Use [go standard template](https://pkg.go.dev/html/template), not additional lib
 - [x] Support nested template
 - [x] Support OS file system (relative path)
 - [x] Support go fsys (go embed)
-- [ ] Support html/template
+- [x] Support html/template
 - [x] Support text/template
 - [ ] Custom prefix
 - [ ] Exclude specific file
@@ -22,9 +22,9 @@ Use [go standard template](https://pkg.go.dev/html/template), not additional lib
 
 ## Usages 
 
-Print entries
+Get entries using `dirtmpl.Entries()` or `dirtmpl.EntriesFS()`
 ```go
-entries, err := dirtmpl.Entries("samples/simpletxt") // or use `dirtmpl.EntriesFS()` for go embed
+entries, err := dirtmpl.Entries("samples/simpletxt")
 if err != nil {
     log.Fatal(err)
 }
@@ -34,9 +34,9 @@ for _, entry := range entries {
 }
 ```
 
-Execute template
+Get templates using `dirtmpl.TextTemplates()`, `dirtmpl.TextTemplatesFS()`, `dirtmpl.HTMLTemplates()`, or `dirtmpl.HTMLTemplatesFS()`
 ```go
-m, err := dirtmpl.TextTemplate("samples/simpletxt") // or use `dirtmpl.TextTemplateFS()` for go embed
+m, err := dirtmpl.TextTemplates("samples/simpletxt")
 if err != nil {
     log.Fatal(err)
 }
