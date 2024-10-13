@@ -1,0 +1,3 @@
+{{define "comp_y"}}
+Component Y
+{{end}}
