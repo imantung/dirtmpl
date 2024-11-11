@@ -7,27 +7,19 @@ import (
 	txtTmpl "text/template"
 )
 
-var (
-	DefaultBasePrefix = "_"
-)
-
 func Entries(root string) ([]Entry, error) {
 	td := templateDir{
-		Root:       root,
-		ReadDir:    os.ReadDir,
-		BasePrefix: DefaultBasePrefix,
+		Root:    root,
+		ReadDir: os.ReadDir,
 	}
-
 	return td.Entries()
 }
 
 func EntriesFS(f embed.FS, root string) ([]Entry, error) {
 	td := templateDir{
-		Root:       root,
-		ReadDir:    f.ReadDir,
-		BasePrefix: DefaultBasePrefix,
+		Root:    root,
+		ReadDir: f.ReadDir,
 	}
-
 	return td.Entries()
 }
 

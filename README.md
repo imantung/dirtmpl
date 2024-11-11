@@ -3,9 +3,8 @@
 Generate go template map based on the directory. 
 
 The conventions are:
-- Base template use `__base` filename
-- Other base components (inherited) use the prefix `_` filename
-- Other template components (not inherited) stored in the `_comp` folder
+- Base template file at `_base/__base.*` 
+- Components template file at `_private/*` (will not inherit)
 
 Use [go standard template](https://pkg.go.dev/html/template), not additional libraries required.
 
@@ -16,7 +15,8 @@ Use [go standard template](https://pkg.go.dev/html/template), not additional lib
 - [x] Support go fsys (go embed)
 - [x] Support html/template
 - [x] Support text/template
-- [ ] Custom prefix
+- [ ] Custom base template folder
+- [ ] Custom components folder
 - [ ] Exclude specific file
 - [ ] Filter by file extension
 
@@ -41,7 +41,12 @@ if err != nil {
     log.Fatal(err)
 }
 
-err = m["section_b/subsection_b1.md"].Execute(os.Stdout, nil)
+tmpl, ok := m["section_b/subsection_b1.md"]
+if !ok {
+	log.Fatal("template not found")
+}
+
+err = tmpl.Execute(os.Stdout, nil)
 if err != nil {
     log.Fatal(err)
 }

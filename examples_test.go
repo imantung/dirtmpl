@@ -29,17 +29,19 @@ func ExampleEntries_withOSReadDir() {
 
 	// Output:
 	// section_a.md
-	// ↳ samples/simpletxt/__base.md
-	// ↳ samples/simpletxt/_author.md
-	// ↳ samples/simpletxt/_comp/comp_x.txt
+	// ↳ samples/simpletxt/_base/__base.md
+	// ↳ samples/simpletxt/_base/_author.md
 	// ↳ samples/simpletxt/section_a.md
-	// section_b/subsection_b1.md
-	// ↳ samples/simpletxt/__base.md
-	// ↳ samples/simpletxt/_author.md
-	// ↳ samples/simpletxt/section_b/__base.md
-	// ↳ samples/simpletxt/section_b/_author.md
-	// ↳ samples/simpletxt/section_b/_comp/comp_y.txt
-	// ↳ samples/simpletxt/section_b/subsection_b1.md
+	// ↳ samples/simpletxt/_private/comp_x.txt
+	// ↳ samples/simpletxt/section_a.md
+	// section_b/sub_section_b1.md
+	// ↳ samples/simpletxt/_base/__base.md
+	// ↳ samples/simpletxt/_base/_author.md
+	// ↳ samples/simpletxt/section_a.md
+	// ↳ samples/simpletxt/section_b/_base/__base.md
+	// ↳ samples/simpletxt/section_b/sub_section_b1.md
+	// ↳ samples/simpletxt/section_b/_private/comp_y.txt
+	// ↳ samples/simpletxt/section_b/sub_section_b1.md
 }
 
 func ExampleEntries_withGoEmbed() {
@@ -57,17 +59,19 @@ func ExampleEntries_withGoEmbed() {
 
 	// Output:
 	// section_a.md
-	// ↳ samples/simpletxt/__base.md
-	// ↳ samples/simpletxt/_author.md
-	// ↳ samples/simpletxt/_comp/comp_x.txt
+	// ↳ samples/simpletxt/_base/__base.md
+	// ↳ samples/simpletxt/_base/_author.md
 	// ↳ samples/simpletxt/section_a.md
-	// section_b/subsection_b1.md
-	// ↳ samples/simpletxt/__base.md
-	// ↳ samples/simpletxt/_author.md
-	// ↳ samples/simpletxt/section_b/__base.md
-	// ↳ samples/simpletxt/section_b/_author.md
-	// ↳ samples/simpletxt/section_b/_comp/comp_y.txt
-	// ↳ samples/simpletxt/section_b/subsection_b1.md
+	// ↳ samples/simpletxt/_private/comp_x.txt
+	// ↳ samples/simpletxt/section_a.md
+	// section_b/sub_section_b1.md
+	// ↳ samples/simpletxt/_base/__base.md
+	// ↳ samples/simpletxt/_base/_author.md
+	// ↳ samples/simpletxt/section_a.md
+	// ↳ samples/simpletxt/section_b/_base/__base.md
+	// ↳ samples/simpletxt/section_b/sub_section_b1.md
+	// ↳ samples/simpletxt/section_b/_private/comp_y.txt
+	// ↳ samples/simpletxt/section_b/sub_section_b1.md
 }
 
 func ExampleTextTemplates() {
@@ -76,7 +80,12 @@ func ExampleTextTemplates() {
 		log.Fatal(err)
 	}
 
-	err = m["section_b/subsection_b1.md"].Execute(os.Stdout, nil)
+	tmpl, ok := m["section_b/sub_section_b1.md"]
+	if !ok {
+		log.Fatal("template not found")
+	}
+
+	err = tmpl.Execute(os.Stdout, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -92,7 +101,6 @@ func ExampleTextTemplates() {
 	//
 	//
 	// ## Author
-	//
 	// By iman.tung@gmail.com
 }
 
@@ -102,7 +110,11 @@ func ExampleTextTemplatesFS() {
 		log.Fatal(err)
 	}
 
-	err = m["section_a.md"].Execute(os.Stdout, nil)
+	tmpl, ok := m["section_a.md"]
+	if !ok {
+		log.Fatal("template not found")
+	}
+	err = tmpl.Execute(os.Stdout, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
